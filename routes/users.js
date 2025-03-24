@@ -78,6 +78,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Users list for someone with admin access
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.payload._id);
@@ -92,6 +93,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+//  User by ID
 router.get("/:id", auth, async (req, res) => {
   try {
     if (req.payload._id === req.params.id || req.payload.isAdmin === true) {
@@ -108,6 +110,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+// Update user by ID
 router.put("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.payload._id);
@@ -119,6 +122,7 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
+// Update user isBusiness status
 router.patch("/:id", auth, async (req, res) => {
   try {
     if (req.payload._id === req.params.id) {
@@ -141,6 +145,7 @@ router.patch("/:id", auth, async (req, res) => {
   }
 });
 
+// Delete user by id
 router.delete("/:id", auth, async (req, res) => {
   try {
     if (req.payload._id === req.params.id || req.payload.isAdmin === true) {
