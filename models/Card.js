@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const { mongoose } = require("mongoose");
 
 const cardSchema = new Schema({
   title: String,
@@ -8,8 +9,13 @@ const cardSchema = new Schema({
   email: String,
   web: String,
   image: {
-    url: String,
-    alt: String,
+    url: {
+      type: String,
+      default:
+        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png",
+    },
+    alt: { type: String, default: "Business Card Image" },
+    _id: { type: String, default: new mongoose.Types.ObjectId() },
   },
   address: {
     state: String,
@@ -18,9 +24,12 @@ const cardSchema = new Schema({
     street: String,
     houseNumber: Number,
     zip: Number,
+    _id: { type: String, default: new mongoose.Types.ObjectId() },
   },
   bizNumber: Number,
   likes: [String],
+  user_id: { type: String, default: new mongoose.Types.ObjectId() },
+  createdAt: { type: Date, default: Date.now() },
 });
 
 const Card = model("cards", cardSchema);

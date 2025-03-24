@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const { mongoose } = require("mongoose");
 
 const userSchema = new Schema({
@@ -23,8 +23,12 @@ const userSchema = new Schema({
     _id: { type: String, default: new mongoose.Types.ObjectId() },
   },
   image: {
-    url: String,
-    alt: String,
+    url: {
+      type: String,
+      default:
+        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png",
+    },
+    alt: { type: String, default: "Business Card Image" },
     _id: { type: String, default: new mongoose.Types.ObjectId() },
   },
   createdAt: { type: Date, default: Date.now() },
