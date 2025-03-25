@@ -53,15 +53,18 @@ After starting the server, you can access the API at `http://localhost:8000`. Us
 
 ### Card Management
 
-- `POST /cards/cards`: Create a new business card.
-- `GET /cards/cards`: Retrieve all business cards.
-- `GET /cards/cards/:id`: Retrieve a specific business card.
-- `PUT /cards/cards/:id`: Update a business card.
-- `DELETE /cards/cards/:id`: Delete a business card.
+- `POST /cards`: Create a new business card.
+- `GET /cards`: Retrieve all business cards.
+- `GET /cards/my-cards`: Retrieve all logged in user business cards.
+- `GET /cards/:id`: Retrieve a specific business card.
+- `PUT /cards/:id`: Update a business card details.
+- `PATCH /cards/:id`: Update a business card like status for logged in user.
+- `DELETE /cards/:id`: Delete a business card.
 
 ### User Management
 
-- `GET /users/users`: Retrieve all users.
-- `GET /users/users/:id`: Retrieve a specific user.
-- `PUT /users/users/:id`: Update a user's role.
-- `DELETE /users/users/:id`: Delete a user.
+- `GET /users/`: Retrieve all users.
+- `GET /users/:id`: Retrieve a specific user.
+- `PUT /users/:id`: Update a user details.
+- `PATCH /users/:id`: Change users isBusiness status.
+- `DELETE /users/:id`: Delete a user.
