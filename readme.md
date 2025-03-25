@@ -1,60 +1,67 @@
-# BCard by Saeb Masarwa
+# BCard API
 
-Welcome to my first ever full frontend react app.
-This app was made as a project during Full Stack Development Course.
-It uses an api provided by our college.
+## Overview
 
-## More about the app
+The BCard API provides endpoints for managing users and business cards. Below are the main functionalities:
 
-### Features
+- **User Authentication**: Endpoints for user registration, login, and token verification.
+- **Card Management**: Endpoints for creating, updating, deleting, and retrieving business cards.
+- **User Management**: Endpoints for managing user roles and permissions.
+- **Search**: Endpoints for searching cards by various criteria.
+
+## Features
 
 - **User Authentication**: Secure login and registration system.
 - **Card Management**: Create, edit, and delete business cards.
-- **Search Functionality**: Easily search for cards by name or category.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-### Technologies Used
+## Technologies Used
 
-- **React**: Frontend library for building user interfaces.
 - **JWT**: JSON Web Tokens for secure authentication.
 - **Node.js**: Backend runtime environment.
 - **Express**: Web framework for Node.js.
 - **MongoDB**: NoSQL database for storing card data.
 
-### What is the Project
-
-It's a business cards for users with different levels of access.
-Register is your first step with either an access of User or Business.
-
-Levels:
-
-- User: can like and dislike cards
-- Business: can create and edit and delete his cards and like other cards.
-- Admin: Full access to the system including the before mentioned levels and managing user including deleteing and turn a user between different levels of access.
-
-### Installation
+## Installation
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/saebmasarwa/cardsproject.git
+   git clone https://github.com/SaebMasarwa/bcards-backend.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd cardsproject
+   cd bcards-backend
    ```
 3. Install dependencies:
    ```sh
    npm install
    ```
-4. Start the development server:
+4. Start the server:
    ```sh
    npm start
    ```
 
-### Contributing
+## Usage
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+After starting the server, you can access the API at `http://localhost:8000`. Use tools like Postman to interact with the endpoints.
 
-### License
+## Endpoints
 
-This project is licensed under the MIT License.
+### User Authentication
+
+- `POST /users`: Register a new user.
+- `POST /users/login`: Login a user.
+
+### Card Management
+
+- `POST /cards/cards`: Create a new business card.
+- `GET /cards/cards`: Retrieve all business cards.
+- `GET /cards/cards/:id`: Retrieve a specific business card.
+- `PUT /cards/cards/:id`: Update a business card.
+- `DELETE /cards/cards/:id`: Delete a business card.
+
+### User Management
+
+- `GET /users/users`: Retrieve all users.
+- `GET /users/users/:id`: Retrieve a specific user.
+- `PUT /users/users/:id`: Update a user's role.
+- `DELETE /users/users/:id`: Delete a user.
