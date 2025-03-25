@@ -94,9 +94,59 @@ router.put("/:id", auth, async (req, res) => {
     const user = await User.findById(req.payload._id);
     if (!user) return res.status(404).send("No such user");
 
-    const card = await Card.findByIdAndUpdate(req.params.id, req.body);
+    const card = await Card.findById(req.params.id);
     if (!card) return res.status(400).send("Can't find business card");
-    res.status(200).send(card);
+
+    if (card.user_id === req.payload._id) {
+      let card = new Card(req.body);
+      await card.save();
+      res.status(200).send(card);
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Like status
+router.patch("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.payload._id);
+    if (!user) return res.status(404).send("No such user");
+
+    const card = await Card.findById(req.params.id);
+    if (!card) return res.status(400).send("Can't find business card");
+
+    if (!card.likes.includes(req.payload._id)) {
+      card.likes.push(req.payload._id);
+      await card.save();
+      res.status(200).send(card);
+    } else {
+      card.likes.pop(req.payload._id);
+      await card.save();
+      res.status(200).send(card);
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+// Delete card by id for who created it and admins
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.payload._id);
+    if (!user) return res.status(404).send("No such user, not logged in");
+
+    const card = await Card.findById(req.params.id);
+    if (!card) {
+      return res.status(404).send("Can't find business card");
+    } else {
+      console.log(req.payload._id, card.user_id);
+
+      if (req.payload._id === card.user_id || req.payload.isAdmin === true) {
+        const card = await Card.findByIdAndDelete(req.params.id);
+        if (!card) return res.status(404).send("No such card");
+        res.status(200).send(card);
+      }
+    }
   } catch (error) {
     res.status(400).send(error);
   }
