@@ -22,7 +22,7 @@ mongoose
   })
   .catch((error) => console.log(error));
 
-// Seed data to database for initail users setup if not exists
+// Seed data to database for initail users setup if none exists
 async function mySeeder() {
   const data = await User.find({}).exec();
   const hashedPassword = await bcrypt.hash("1234567890", 14);
