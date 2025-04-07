@@ -86,7 +86,7 @@ router.post("/", auth, async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+// Update card by user who created it
 router.put("/:id", auth, async (req, res) => {
   try {
     const { error } = cardSchema.validate(req.body);
@@ -139,9 +139,27 @@ router.delete("/:id", auth, async (req, res) => {
     if (!card) {
       return res.status(404).send("Can't find business card");
     } else {
-      console.log(req.payload._id, card.user_id);
-
       if (req.payload._id === card.user_id || req.payload.isAdmin === true) {
+        const card = await Card.findByIdAndDelete(req.params.id);
+        if (!card) return res.status(404).send("No such card");
+        res.status(200).send(card);
+      }
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+// Update card's bizNumber by id for admins
+router.put("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.payload._id);
+    if (!user) return res.status(404).send("No such user, not logged in");
+
+    const card = await Card.findById(req.params.id);
+    if (!card) {
+      return res.status(404).send("Can't find business card");
+    } else {
+      if (req.payload.isAdmin === true) {
         const card = await Card.findByIdAndDelete(req.params.id);
         if (!card) return res.status(404).send("No such card");
         res.status(200).send(card);
