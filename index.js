@@ -25,7 +25,8 @@ mongoose
 // Seed data to database for initail users setup if none exists
 async function mySeeder() {
   const data = await User.find({}).exec();
-  const hashedPassword = await bcrypt.hash("1234567890", 14);
+  const salt = await bcrypt.genSalt(14);
+  const hashedPassword = await bcrypt.hash("1234567890", salt);
   if (data.length !== 0) {
     // Data exists, no need to seed.
     return;
