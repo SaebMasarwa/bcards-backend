@@ -112,8 +112,6 @@ async function mySeeder() {
 app.use(morgan(":date[web] - :method - :url - :status - :response-time ms"));
 // morgan token for error logging message
 morgan.token("error", function (req, res) {
-  console.log(res.statusMessage);
-
   return res.statusMessage;
 });
 
