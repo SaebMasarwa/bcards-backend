@@ -14,7 +14,7 @@ const cardSchema = new Schema({
       default:
         "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png",
     },
-    alt: { type: String, default: "Business Card Image" },
+    alt: { type: String, default: "Business Card Imag" },
     _id: { type: String, default: new mongoose.Types.ObjectId() },
   },
   address: {
