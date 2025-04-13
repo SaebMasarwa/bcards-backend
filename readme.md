@@ -35,9 +35,13 @@ The BCard API provides endpoints for managing users and business cards. Below ar
    ```sh
    npm install
    ```
-4. Start the server:
+4. Start the server in dev mode:
    ```sh
-   npm start
+   npm run start:dev
+   ```
+5. Start the server in production mode:
+   ```sh
+   npm run start:prod
    ```
 
 ## Usage
